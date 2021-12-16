@@ -6,40 +6,40 @@ and open the template in the editor.
 -->
 <?php
 session_start();
-if(!isset($_SESSION['logadoM']) && $_SESSION['logadoM'] != true) {
+if (!isset($_SESSION['logado']) && $_SESSION['logado'] != true) {
     header("Location: login.php");
 } else {
-    echo $_SESSION['usuarioM'] . " | " . $_SESSION['emailM'];
+    echo $_SESSION['usuario'] . " | " . $_SESSION['email'];
     echo " | <a href='../controller/logout.php'>Sair</a>";
 }
-$id = null;
-if(isset($_POST['editar'])){
-    $id = $_POST['idUser'];
-    
-}
+
 require_once '../controller/cUsuario.php';
-$cadUser = new cUsuario();
-$user = $cadUser->getUsuarioById($id);
+$id = 0;
+if (isset($_POST['updateUser'])) {
+    $id = $_POST['id'];
+}
+$listaUser = new cUsuario();
+$lis = $listaUser->getUsuarioById($id);
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Editar Usuário</title>
     </head>
     <body>
         <h1>Editar Usuário</h1>
         <form action="../controller/updateUser.php" method="POST">
-             <input type="hidden" name="id" value="<?php echo $user[0] ['idUser']; ?>"/>
-             <input type="text" name="nome" value="<?php echo $user[0] ['nomeUser']; ?>"/>
+            <input type="hidden" value="<?php echo $lis[0]['idUser']; ?>" name="id"/>
+            <input type="text" required value="<?php echo $lis[0]['nomeUser']; ?>" name="nome"/>
             <br><br>
-            <input type="email" name="email" disabled value="<?php echo $user[0] ['email']; ?>"/>
+            <input type="email" required value="<?php echo $lis[0]['email']; ?>" name="email"/>
             <br><br>
-            
-            <input type="submit" name="update" value="Salvar"/>
-           
-            <input type="button" value="Cancelar" 
-                   onclick="location.href='listaUsuarios.php'"/>
-           
+            <input type="submit" value="Salvar Alterações" name="update"/>
+            <input type="button" value="Cancelar"
+                   onclick="location.href = 'listaUsuarios.php'"/>
         </form>
+        <?php
+        // put your code here
+        ?>
     </body>
 </html>

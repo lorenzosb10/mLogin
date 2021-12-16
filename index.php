@@ -6,10 +6,10 @@ and open the template in the editor.
 -->
 <?php
 session_start();
-if(!isset($_SESSION['logadoM']) && $_SESSION['logadoM'] != true) {
+if(!isset($_SESSION['logado']) && $_SESSION['logado'] != true) {
     header("Location: view/login.php");
 } else {
-    echo $_SESSION['usuarioM'] . " | " . $_SESSION['emailM'];
+    echo $_SESSION['usuario'] . " | " . $_SESSION['email'];
     echo " | <a href='controller/logout.php'>Sair</a>";
 }
 ?>
@@ -22,5 +22,10 @@ if(!isset($_SESSION['logadoM']) && $_SESSION['logadoM'] != true) {
         <h1>Página Inicial</h1>
         <br><br>
         <button onclick="location.href='view/cadUsuario.php'">Cadastro de Usuário</button>
+        <br><br>
+        <button onclick="location.href='view/cadPessoaF.php'">Cadastro de Pessoa Física</button>
+        <br><br>
+        <button onclick="location.href='view/CadPessoaJ.php'">Cadastro de Pessoa Jurídica</button>
+       
     </body>
 </html>

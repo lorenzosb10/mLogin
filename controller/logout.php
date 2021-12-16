@@ -6,15 +6,16 @@
  * and open the template in the editor.
  */
 
-//Inicializa a sessão
+// Inicializa a sessão
+
 session_start();
 
-//Renova tpdas as variáveis da sessão
+//Renova todas as variáveis da sessão
 $_SESSION = array();
 
-//Destuir sessão
+//Destruir sessão
 session_destroy();
 
-//redirecionar para tela de login após logout
+//Redirecionar para tela de login após logout
 header("Location: ../view/login.php");
 exit;

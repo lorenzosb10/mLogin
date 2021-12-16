@@ -19,7 +19,7 @@ class cUsuario {
             $nome = $_POST['nome'];
             $email = $_POST['email'];
             $pas = $_POST['pas'];
-            
+
             $pdo = require_once '../pdo/connection.php';
             $sql = "insert into usuario (nomeUser, email, pas) values (?,?,?)";
             $sth = $pdo->prepare($sql);
@@ -32,10 +32,10 @@ class cUsuario {
             unset($pdo);
         }
     }
-    
+
     public function getUsuario() {
         $pdo = require_once '../pdo/connection.php';
-        $sql = "select * idUser, nomeUser, email from usuario";
+        $sql = "select idUser, nomeUser, email from usuario";
         $sth = $pdo->prepare($sql);
         $sth->execute();
         $result = $sth->fetchAll();
@@ -43,10 +43,11 @@ class cUsuario {
         unset($pdo);
         return $result;
     }
+
     public function deletarUser() {
-        if(isset($_POST['deletar'])){
+        if (isset($_POST['deletar'])) {
             $id = $_POST['idUser'];
-            
+
             $pdo = require_once '../pdo/connection.php';
             $sql = "delete from usuario where idUser = ?";
             $sth = $pdo->prepare($sql);
@@ -55,16 +56,14 @@ class cUsuario {
             unset($sth);
             unset($pdo);
             header("Refresh: 0");
-            
         }
-        
     }
 
     public function getUsuarioById($id) {
         $pdo = require_once '../pdo/connection.php';
-        $sql = "select * idUser, nomeUser, email from usuario where idUser = ?";
+        $sql = "select * from usuario where idUser = $id";
         $sth = $pdo->prepare($sql);
-        $sth->execute([$id]);
+        $sth->execute();
         $result = $sth->fetchAll();
         unset($sth);
         unset($pdo);

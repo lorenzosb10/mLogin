@@ -24,19 +24,20 @@ class cLogin {
             $sql = "select * from usuario where email = ?";
 
             $statement = $pdo->prepare($sql);
-            $statement->execute([$email,]);
+            $statement->execute([$email]);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $count = $statement->rowCount();
             if ($count > 0) {
-                if(password_verify($pas, $result['pas'])){
+                if (password_verify($pas, $result['pas'])) {
+                    session_start();
                     $_SESSION['usuario'] = $result['nomeUser'];
                     $_SESSION['email'] = $result['email'];
                     $_SESSION['logado'] = true;
                     header("Location: ../index.php");
                 }
-            }else {
-               header("Location: login.php");
-                
+            } else {
+
+                header("Location: login.php");
             }
             unset($statement);
             unset($pdo);

@@ -6,10 +6,10 @@ and open the template in the editor.
 -->
 <?php
 session_start();
-if(!isset($_SESSION['logadoM']) && $_SESSION['logadoM'] != true) {
+if(!isset($_SESSION['logado']) && $_SESSION['logado'] != true) {
     header("Location: login.php");
 } else {
-    echo $_SESSION['usuarioM'] . " | " . $_SESSION['emailM'];
+    echo $_SESSION['usuario'] . " | " . $_SESSION['email'];
     echo " | <a href='../controller/logout.php'>Sair</a>";
 }
 require_once '../controller/cUsuario.php';
@@ -42,7 +42,7 @@ $listaUser = $cadUser->getUsuario();
                             <input type="hidden" value="<?php echo $user['idUser'] ?>" name="idUser"/>
                             <input type="submit" name="editar" value="Editar"/>
                         </form>
-                        <?php if($user['email']!=$_SESSION['emailM']){ ?>
+                        <?php if($user['email'] != $_SESSION['email']){ ?>
                         <form action="../controller/deleteUser.php" method="post">
                             <input type="hidden" value="<?php echo $user['idUser'] ?>" name="idUser"/>
                             <input type="submit" name="deletar" value="Deletar"/>

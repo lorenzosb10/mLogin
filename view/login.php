@@ -7,11 +7,8 @@ and open the template in the editor.
 
 <?php
 session_start();
-if(!isset($_SESSION['logadoM']) && $_SESSION['logadoM'] == true) {
+if (isset($_SESSION['logado']) && $_SESSION['logado'] == true) {
     header("Location: ../index.php");
-} else {
-    echo $_SESSION['usuarioM'] . " | " . $_SESSION['emailM'];
-    echo " | <a href='../controller/logout.php'>Sair</a>";
 }
 require_once '../controller/cLogin.php';
 $login = new cLogin();
@@ -23,15 +20,16 @@ $login = new cLogin();
     </head>
     <body>
         <h1>Login</h1>
-        <form action="<?php $login->logar(); ?>" method="POST">
-            <input type="email" name="email" required placeholder="E-mail login"/>
-            <br><br>
-            <input type="password" name="pas" required placeholder="Senha..."/>
-            <br><br>
-            <input type="submit" name="logar" value="Logar"/>
-        </form>
-        <?php
-        // put your code here
-        ?>
-    </body>
+        <form action= "<?php $login->logar(); ?>" Method="POST"/>
+        <input type="email" name="email" required placeholder="E-mail login"/>
+        <br><br>
+        <input type="password" name="pas" required placeholder="Senha..."/>
+        <br><br>
+        <input type="submit" name="logar" value="Logar"/>
+    </form>
+    <?php
+    // put your code here
+    ?>
+</body>
 </html>
+
